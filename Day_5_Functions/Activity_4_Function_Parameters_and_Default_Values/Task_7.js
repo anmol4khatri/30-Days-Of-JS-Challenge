@@ -12,7 +12,6 @@ console.log(ans2);
 
 /*
 Output:
-
 20
 5
 */
