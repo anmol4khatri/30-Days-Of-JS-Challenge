@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage and SessionStorage Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+        h2 { margin-top: 20px; }
+        form { margin-bottom: 20px; }
+        input, button { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>LocalStorage and SessionStorage Demo</h1>
+
+    <h2>LocalStorage Form</h2>
+    <form id="userForm">
+        <input type="text" id="name" placeholder="Name"><br>
+        <input type="email" id="email" placeholder="Email"><br>
+        <button type="submit">Submit to LocalStorage</button>
+    </form>
+    <div id="displayData"></div>
+
+    <h2>SessionStorage Form</h2>
+    <form id="sessionForm">
+        <input type="text" id="sessionName" placeholder="Name"><br>
+        <input type="email" id="sessionEmail" placeholder="Email"><br>
+        <button type="submit">Submit to SessionStorage</button>
+    </form>
+    <div id="displaySessionData"></div>
+
+    <h2>Console Output</h2>
+    <pre id="consoleOutput"></pre>
+
+    <script>
+        // Function to log to both console and page
+        function log(message) {
+            console.log(message);
+            document.getElementById('consoleOutput').textContent += message + '\n';
+        }
+
+        // Activity 1: Understanding LocalStorage
+
+        log("Task 1: Save and retrieve a string from localStorage");
+        localStorage.setItem('myString', 'Hello, LocalStorage!');
+        const retrievedString = localStorage.getItem('myString');
+        log(retrievedString);
+
+        log("\nTask 2: Save and retrieve an object from localStorage");
+        const myObject = { name: 'John', age: 30 };
+        localStorage.setItem('myObject', JSON.stringify(myObject));
+        const retrievedObject = JSON.parse(localStorage.getItem('myObject'));
+        log(JSON.stringify(retrievedObject));
+
+        // Activity 2: Using LocalStorage
+
+        log("\nTask 3: Create a form that saves to localStorage");
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            localStorage.setItem('userData', JSON.stringify({ name, email }));
+            displayUserData();
+        });
+
+        function displayUserData() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            if (userData) {
+                document.getElementById('displayData').textContent = `Name: ${userData.name}, Email: ${userData.email}`;
+            }
+        }
+
+        // Call this on page load
+        displayUserData();
+
+        log("\nTask 4: Remove an item from localStorage");
+        log("Before removal: " + localStorage.getItem('myString'));
+        localStorage.removeItem('myString');
+        log("After removal: " + localStorage.getItem('myString'));
+
+        // Activity 3: Understanding SessionStorage
+
+        log("\nTask 5: Save and retrieve a string from sessionStorage");
+        sessionStorage.setItem('mySessionString', 'Hello, SessionStorage!');
+        const retrievedSessionString = sessionStorage.getItem('mySessionString');
+        log(retrievedSessionString);
+
+        log("\nTask 6: Save and retrieve an object from sessionStorage");
+        const mySessionObject = { fruit: 'Apple', color: 'Red' };
+        sessionStorage.setItem('mySessionObject', JSON.stringify(mySessionObject));
+        const retrievedSessionObject = JSON.parse(sessionStorage.getItem('mySessionObject'));
+        log(JSON.stringify(retrievedSessionObject));
+
+        // Activity 4: Using SessionStorage
+
+        log("\nTask 7: Create a form that saves to sessionStorage");
+        document.getElementById('sessionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('sessionName').value;
+            const email = document.getElementById('sessionEmail').value;
+            sessionStorage.setItem('sessionUserData', JSON.stringify({ name, email }));
+            displaySessionUserData();
+        });
+
+        function displaySessionUserData() {
+            const userData = JSON.parse(sessionStorage.getItem('sessionUserData'));
+            if (userData) {
+                document.getElementById('displaySessionData').textContent = `Name: ${userData.name}, Email: ${userData.email}`;
+            }
+        }
+
+        // Call this on page load
+        displaySessionUserData();
+
+        log("\nTask 8: Remove an item from sessionStorage");
+        log("Before removal: " + sessionStorage.getItem('mySessionString'));
+        sessionStorage.removeItem('mySessionString');
+        log("After removal: " + sessionStorage.getItem('mySessionString'));
+
+        // Activity 5: Comparing LocalStorage and SessionStorage
+
+        log("\nTask 9: Save to both localStorage and sessionStorage");
+        function saveToStorages(key, value) {
+            localStorage.setItem(key, value);
+            sessionStorage.setItem(key, value);
+            log("localStorage value: " + localStorage.getItem(key));
+            log("sessionStorage value: " + sessionStorage.getItem(key));
+        }
+
+        saveToStorages('sharedKey', 'Shared Value');
+
+        log("\nTask 10: Clear both localStorage and sessionStorage");
+        function clearStorages() {
+            localStorage.clear();
+            sessionStorage.clear();
+            log("localStorage length: " + localStorage.length);
+            log("sessionStorage length: " + sessionStorage.length);
+        }
+
+        clearStorages();
+    </script>
+</body>
+</html>
