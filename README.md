@@ -1,5 +1,5 @@
 # 30-days-of-JS-challenge
-Welcome to my 30 Days of JS Challenge repository! Here, I'll share my daily updates and progress as I take on the "30 Days of JS Challenge" initiated by Hitesh Choudhary. Stay tuned for code snippets, projects, and learning experiences as I dive deep into JavaScript over the next 30 days.
+Welcome to my 30 Days of JS Challenge repository! Here, I have shared my daily updates and progress as I take on the "30 Days of JS Challenge" initiated by Hitesh Choudhary. Stay tuned for code snippets, projects, and learning experiences as I dive deep into JavaScript over the next 30 days.
 
 ## About the Challenge
 
